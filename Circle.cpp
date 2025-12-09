@@ -1,41 +1,41 @@
-#include "Shape.h"
 #include "Circle.h"
-#include "shapeException.h"
+#include "ShapeException.h"
 #include <iostream>
 
-Circle::Circle(std::string nam, std::string col, double rad):Shape(col, nam) {
-	//void setName(string nam);
-	//void setColor(string col); <-this redefines it d/n use
-	setRad(rad);		
+Circle::Circle(std::string nam, std::string col, double rad)
+    : Shape(nam, col)
+{
+    setRad(rad);
 }
+
 void Circle::draw()
 {
-	std::cout << std::endl<<"Color is "<<getColor() << std::endl <<"Name is "<< getName()<< std::endl<<"radius is "<<getRad()<< std::endl<<"Circumference: "<< CalCircumference()<< std::endl;;
+    std::cout << std::endl
+              << "Color is " << getColor() << std::endl
+              << "Name is " << getName() << std::endl
+              << "Radius is " << getRad() << std::endl
+              << "Circumference: " << CalCircumference() << std::endl;
 }
 
-void Circle::setRad(double rad) {
-	radius = rad;
+void Circle::setRad(double rad)
+{
+    if (rad < 0) {
+        throw ShapeException();
+    }
+    radius = rad;
 }
 
-double Circle::CalArea() {
-	double area = 3.14*radius*radius;
-	
-	return area;
-	
+double Circle::getRad()
+{
+    return radius;
 }
 
-double Circle:: getRad() {
-	return radius;
+double Circle::CalArea()
+{
+    return 3.14 * radius * radius;
 }
 
-
-double Circle::CalCircumference() {
-	double circumference = 2 * (3.14)*radius;
-	if (circumference < 0)
-	{
-		throw shapeException();
-	}
-	return circumference;
-
-
+double Circle::CalCircumference()
+{
+    return 2 * 3.14 * radius;
 }
