@@ -34,7 +34,6 @@ int main()
 
     std::cout << "Enter information for your objects\n";
 
-    char shapetype;
     char x = 'y';
 
     while (x != 'x') {
@@ -45,16 +44,16 @@ int main()
 
         if (shapeInput.length() != 1) {
             std::cout << "Warning – Don’t try to build more than one shape at once\n";
+            std::cin.ignore(10000, '\n');
             continue;
         }
 
-        shapetype = shapeInput[0];
+        char shapetype = shapeInput[0];
 
         try {
             switch (shapetype) {
 
             case 'c':
-                std::cout << "enter color, name, rad\n";
                 std::cin >> col >> nam >> rad;
                 checkNumericInput();
                 circ.setColor(col);
@@ -64,7 +63,6 @@ int main()
                 break;
 
             case 'q':
-                std::cout << "enter name, color, height, width\n";
                 std::cin >> nam >> col >> height >> width;
                 checkNumericInput();
                 quad.setName(nam);
@@ -75,7 +73,6 @@ int main()
                 break;
 
             case 'r':
-                std::cout << "enter name, color, height, width\n";
                 std::cin >> nam >> col >> height >> width;
                 checkNumericInput();
                 rec.setName(nam);
@@ -86,7 +83,6 @@ int main()
                 break;
 
             case 'p':
-                std::cout << "enter name, color, height, width, angle1, angle2\n";
                 std::cin >> nam >> col >> height >> width >> ang >> ang2;
                 checkNumericInput();
                 para.setName(nam);
@@ -108,6 +104,7 @@ int main()
 
         catch (InputException& e) {
             std::cout << "INPUT ERROR: " << e.what() << "\n";
+            std::cin.ignore(10000, '\n');
             continue;
         }
 
