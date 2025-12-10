@@ -12,7 +12,7 @@ void checkNumericInput() {
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
-        throw InputException("Invalid numeric input");
+        throw InputException("Invalid numeric input.");
     }
 }
 
@@ -24,21 +24,31 @@ int main()
 
     Circle circ(col, nam, rad);
     Quadrilateral quad(nam, col, width, height);
-    rectangle rec(nam, col, width, height);
+    Rectangle rec(nam, col, width, height);
     Parallelogram para(nam, col, width, height, ang, ang2);
 
     Shape* ptrcirc = &circ;
     Shape* ptrquad = &quad;
-    Shape* ptrrec = &rec;
+    Shape* ptrrec  = &rec;
     Shape* ptrpara = &para;
 
     std::cout << "Enter information for your objects\n";
+
     char shapetype;
     char x = 'y';
 
     while (x != 'x') {
         std::cout << "c=circle, q=quadrilateral, r=rectangle, p=parallelogram\n";
-        std::cin >> shapetype;
+
+        std::string shapeInput;
+        std::cin >> shapeInput;
+
+        if (shapeInput.length() != 1) {
+            std::cout << "Warning – Don’t try to build more than one shape at once\n";
+            continue;
+        }
+
+        shapetype = shapeInput[0];
 
         try {
             switch (shapetype) {
